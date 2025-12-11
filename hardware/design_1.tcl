@@ -308,11 +308,11 @@ proc create_root_design { parentCell } {
     CONFIG.PSU__CRL_APB__SDIO0_REF_CTRL__SRCSEL {IOPLL} \
     CONFIG.PSU__CRL_APB__SDIO1_REF_CTRL__FREQMHZ {200} \
     CONFIG.PSU__CRL_APB__SDIO1_REF_CTRL__SRCSEL {IOPLL} \
-    CONFIG.PSU__CRL_APB__SPI0_REF_CTRL__ACT_FREQMHZ {19.999996} \
-    CONFIG.PSU__CRL_APB__SPI0_REF_CTRL__FREQMHZ {20} \
+    CONFIG.PSU__CRL_APB__SPI0_REF_CTRL__ACT_FREQMHZ {187.499969} \
+    CONFIG.PSU__CRL_APB__SPI0_REF_CTRL__FREQMHZ {200} \
     CONFIG.PSU__CRL_APB__SPI0_REF_CTRL__SRCSEL {IOPLL} \
-    CONFIG.PSU__CRL_APB__SPI1_REF_CTRL__ACT_FREQMHZ {1.000000} \
-    CONFIG.PSU__CRL_APB__SPI1_REF_CTRL__FREQMHZ {1} \
+    CONFIG.PSU__CRL_APB__SPI1_REF_CTRL__ACT_FREQMHZ {187.499969} \
+    CONFIG.PSU__CRL_APB__SPI1_REF_CTRL__FREQMHZ {200} \
     CONFIG.PSU__CRL_APB__SPI1_REF_CTRL__SRCSEL {IOPLL} \
     CONFIG.PSU__CRL_APB__TIMESTAMP_REF_CTRL__ACT_FREQMHZ {33.333328} \
     CONFIG.PSU__CRL_APB__TIMESTAMP_REF_CTRL__FREQMHZ {100} \
@@ -490,6 +490,7 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()
@@ -501,6 +502,4 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
 
 create_root_design ""
 
-
-common::send_gid_msg -ssname BD::TCL -id 2053 -severity "WARNING" "This Tcl script was generated from a block design that has not been validated. It is possible that design <$design_name> may result in errors during validation."
 
