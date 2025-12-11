@@ -1,0 +1,8 @@
+hardware/*
+!hardware/*.tcl
+
+_ide
+
+vitis/*
+!vitis/sourceFile
+!vitis/hw_description

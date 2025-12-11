@@ -1,0 +1,40 @@
+# Clock Configuration Example for RFSoC4x2
+
+This repository provides an example of configuring the clock chips **LMX04828** and **LMK2594** on the RFSoC4x2 board using **SPI in bare-metal**.
+
+> **Note**  
+> There is a known issue: **PLL1 of the LMK cannot lock during the first few minutes after powering on the board**.  
+> If this happens, rerun the clock application multiple times until **all four CLOCK STATUS indicators are ON**.
+
+The hexadecimal configuration values used for the clock chips are generated from **TICS Pro**, and they match the official PYNQ clock configuration files:
+- `LMK04828_245.76.txt`
+- `LMX2594_291.52.txt`
+
+These files are available in the PYNQ RFSoC4x2 repository:  
+<https://github.com/Xilinx/RFSoC-PYNQ/tree/master/boards/RFSoC4x2/packages/tics/tics/register_txts>
+
+---
+
+## Getting Started
+
+### 1. Build the Vivado Project
+
+1. Launch **Vivado 2025.1**.
+2. Source the provided TCL script:
+   ```tcl
+   source ./hardware/design_1.tcl
+   ```
+3. Generate the bitstream.
+4. Export the hardware design.
+
+### 2. Build the Vitis Project
+1. Launch **Vitis 2025.1** and set your workspace.
+
+2. Create a **platform component** from the ``.xdc`` file provided in the ``hw_description`` folder
+(or use your own design exported from Vivado).
+
+3. Create a new **application component**.
+
+4. Import the source files from the ``sourceFile`` directory.
+
+5. Build and run the application.
