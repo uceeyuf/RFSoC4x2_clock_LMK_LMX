@@ -1,0 +1,104 @@
+/include/ "system-conf.dtsi"
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/gpio/gpio.h>
+#include "pl.dtsi"
+/ {
+    led@ff0a0004{
+        compatible = "realdigital,led";
+        status = "okay";
+        default-state = "on";
+        led-gpio = <&gpio 20 1>;//引用gpio控制器，mio20,高电平有效
+    };
+    
+    pskey@ff0a0004{
+        compatible = "realdigital,pskey";
+        status = "okay";
+        pskey-gpio = <&gpio 23 GPIO_ACTIVE_HIGH>;//引用gpio控制器，mio23,高电平有效
+        interrupt-parent = <&gpio>;
+        interrupts = <23 IRQ_TYPE_EDGE_RISING>;
+    };
+    // sgdma0: sgdma0 {
+    //     compatible = "xzy,axidma";
+    //     //即使只有一个DMA通道，dmas属性中也需要保持0对应mm2s和1对应s2mm
+    //     dmas = <&axi_dma_0 0>, <&axi_dma_0 1>;
+    //     dma-names = "axidmamm2s", "axidmas2mm";
+    //     dma-coherent;
+    // };
+    pl_keyled: pl_keyled {
+        compatible = "xzy,pl_keyled";
+        status = "okay";
+        led0-gpios = <&gpio 92 GPIO_ACTIVE_HIGH>;
+        led1-gpios = <&gpio 93 GPIO_ACTIVE_HIGH>;
+        led2-gpios = <&gpio 94 GPIO_ACTIVE_HIGH>;
+        led3-gpios = <&gpio 95 GPIO_ACTIVE_HIGH>;
+        rgb0r-gpios = <&gpio 86 GPIO_ACTIVE_HIGH>;
+        rgb0g-gpios = <&gpio 87 GPIO_ACTIVE_HIGH>;
+        rgb0b-gpios = <&gpio 88 GPIO_ACTIVE_HIGH>;
+        rgb1r-gpios = <&gpio 89 GPIO_ACTIVE_HIGH>;
+        rgb1g-gpios = <&gpio 90 GPIO_ACTIVE_HIGH>;
+        rgb1b-gpios = <&gpio 91 GPIO_ACTIVE_HIGH>;
+        pb0-gpios = <&gpio 82 GPIO_ACTIVE_HIGH>;
+        pb1-gpios = <&gpio 83 GPIO_ACTIVE_HIGH>;
+        pb2-gpios = <&gpio 84 GPIO_ACTIVE_HIGH>;
+        pb3-gpios = <&gpio 85 GPIO_ACTIVE_HIGH>;
+        sw0-gpios = <&gpio 78 GPIO_ACTIVE_HIGH>;
+        sw1-gpios = <&gpio 79 GPIO_ACTIVE_HIGH>;
+        sw2-gpios = <&gpio 80 GPIO_ACTIVE_HIGH>;
+        sw3-gpios = <&gpio 81 GPIO_ACTIVE_HIGH>;
+        /* 为 pb0-3 添加中断 (顺序: pb0 pb1 pb2 pb3) */
+        interrupt-parent = <&gpio>;
+        interrupts = <82 IRQ_TYPE_EDGE_RISING>,
+                    <83 IRQ_TYPE_EDGE_RISING>,
+                    <84 IRQ_TYPE_EDGE_RISING>,
+                    <85 IRQ_TYPE_EDGE_RISING>;
+    };
+
+};
+
+
+&sdhci0 { 
+    status = "okay"; 
+    disable-wp; 
+    no-1-8-v; 
+    bus-width = <4>;
+}; 
+
+/* USB */
+&dwc3_0{
+	status = "okay";
+	dr_mode = "host";
+};
+	
+&gpio {
+	status = "okay";
+};
+
+&spi0 {
+    status = "okay";
+    is-decoded-cs = <0>; /* 使用控制器的自动片选 */
+    num-cs = <3>;         /* 总共 3 个片选 */
+
+    lmk@0 {
+        compatible = "soc_spi_lmk";
+        reg = <0>; /* 使用 CS0 */
+        spi-max-frequency = <500000>;
+        label = "lmk";
+        lmk-rst = <&gpio 7 GPIO_ACTIVE_HIGH>; /* 复位引脚 */
+        lmk-sel0 = <&gpio 8 GPIO_ACTIVE_HIGH>; /* SEL0 引脚 */
+        lmk-sel1 = <&gpio 12 GPIO_ACTIVE_HIGH>; /* SEL1 引脚 */
+    };
+
+    lmx1@1 {
+        compatible = "soc_spi_lmx";
+        reg = <1>; /* 使用 CS1 */
+        spi-max-frequency = <1000000>;
+        label = "lmx1";
+    };
+
+    lmx2@2 {
+        compatible = "soc_spi_lmx";
+        reg = <2>; /* 使用 CS2 */
+        spi-max-frequency = <1000000>;
+        label = "lmx2";
+    };
+};
