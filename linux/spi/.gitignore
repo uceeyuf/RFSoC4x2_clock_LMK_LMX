@@ -1,0 +1,9 @@
+LMK/*
+!LMK/Makefile
+!LMK/*.c
+LMK/*.mod.c
+
+LMX/*
+!LMX/Makefile
+!LMX/*.c
+LMX/*.mod.c
