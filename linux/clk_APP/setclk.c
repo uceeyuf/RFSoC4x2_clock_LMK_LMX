@@ -32,20 +32,10 @@ int main(int argc, char *argv[]) {
     printf("open file fail\n");
     return -1;
   }
-  while (1) {
-    ret = write(fd, buf, buf_len); // 写入自定义字符串
-    if (ret < 0) {
-      printf("write file fail\n");
-      return -1;
-    }
-    sleep(5);
-    ret = read(fd, &readback, sizeof(readback));
-    if (ret < 0) {
-      printf("read file fail\n");
-      return -1;
-    }
-    if (readback == 0x3)
-      break;
+  ret = write(fd, buf, buf_len); // 写入自定义字符串
+  if (ret < 0) {
+    printf("write file fail\n");
+    return -1;
   }
 
   ret = close(fd);
