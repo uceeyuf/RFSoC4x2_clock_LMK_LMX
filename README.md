@@ -39,7 +39,3 @@ These files are available in the PYNQ RFSoC4x2 repository:
 4. Import the source files from the ``sourceFile`` directory.
 
 5. Build and run the application.
-
-The bare-metal driver builds with both Vitis flows: the SDT flow (Vitis 2023.2 and later, `SDT` defined) looks up the SPI/GPIO drivers by base address, the classic flow (Vitis 2020.2 to 2023.1) by device ID. Define `CLK_DEBUG` to print the SPI read-back of every register.
-
-It has been used unchanged on the board with Vitis 2020.2: after `write_clk(0)`, `write_clk(1)`, `write_clk(2)` the DAC tile 228 and ADC tile 226 PLLs lock at 3.93216 GSPS from the 491.52 MHz reference (see [rfsoc_ofdm / RFSoC4x2 ofdm_video](https://github.com/uceeyuf/rfsoc_ofdm/tree/rfsoc4x2-ofdm-video/boards/RFSoC4x2/ofdm_video)).
