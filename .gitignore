@@ -6,3 +6,8 @@ _ide
 vitis/*
 !vitis/sourceFile
 !vitis/hw_description
+baremetal_rfdc/build/
+baremetal_rfdc/vitis_ws/
+baremetal_rfdc/.Xil/
+*.log
+*.jou

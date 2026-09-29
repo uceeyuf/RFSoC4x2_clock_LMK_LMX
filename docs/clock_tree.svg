@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444"/>
+    </marker>
+    <style>
+      rect{stroke-width:1.4;rx:6;ry:6}
+      .ps{fill:#e8f0fe;stroke:#4a78c2}
+      .clk{fill:#fff3dc;stroke:#d08a00}
+      .rf{fill:#fde8e8;stroke:#c24a4a}
+      line,path.l{stroke:#444;stroke-width:1.4;fill:none;marker-end:url(#a)}
+      path.d{stroke:#4a78c2;stroke-width:1.2;fill:none;stroke-dasharray:5 4;marker-end:url(#a)}
+      .t{text-anchor:middle}
+      .s{font-size:11px;fill:#555;text-anchor:middle}
+    </style>
+  </defs>
+
+  <rect class="ps" x="20" y="95" width="150" height="110"/>
+  <text class="t" x="95" y="118">Zynq PS</text>
+  <text class="s" x="95" y="140">SPI0 (MIO 0..5)</text>
+  <text class="s" x="95" y="156">SS0 LMK, SS1/SS2 LMX</text>
+  <text class="s" x="95" y="176">MIO7 LMK reset</text>
+  <text class="s" x="95" y="192">MIO8 / MIO12 CLKin_SEL</text>
+
+  <rect class="clk" x="260" y="115" width="150" height="70"/>
+  <text class="t" x="335" y="140">LMK04828</text>
+  <text class="s" x="335" y="160">245.76 MHz</text>
+  <text class="s" x="335" y="175">+ SYSREF, PL clocks</text>
+
+  <rect class="clk" x="490" y="40" width="140" height="60"/>
+  <text class="t" x="560" y="65">LMX2594 (SS1)</text>
+  <text class="s" x="560" y="84">491.52 MHz</text>
+  <rect class="clk" x="490" y="200" width="140" height="60"/>
+  <text class="t" x="560" y="225">LMX2594 (SS2)</text>
+  <text class="s" x="560" y="244">491.52 MHz</text>
+
+  <rect class="rf" x="710" y="40" width="130" height="60"/>
+  <text class="t" x="775" y="65">RF tile PLLs</text>
+  <text class="s" x="775" y="84">reference</text>
+  <rect class="rf" x="710" y="200" width="130" height="60"/>
+  <text class="t" x="775" y="225">RF tile PLLs</text>
+  <text class="s" x="775" y="244">reference</text>
+
+  <path class="d" d="M170,150 H260"/>
+  <text class="s" x="215" y="143">SPI</text>
+  <path class="d" d="M95,95 V20 H560 V40"/>
+  <path class="d" d="M95,205 V285 H560 V260"/>
+  <path class="l" d="M410,135 H450 V70 H490"/>
+  <path class="l" d="M410,165 H450 V230 H490"/>
+  <line x1="630" y1="70" x2="710" y2="70"/>
+  <line x1="630" y1="230" x2="710" y2="230"/>
+  <text class="s" x="775" y="125">e.g. DAC tile 228 / ADC tile 226:</text>
+  <text class="s" x="775" y="141">3.93216 GSPS</text>
+</svg>
