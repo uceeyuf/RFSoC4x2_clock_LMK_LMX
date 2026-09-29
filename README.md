@@ -61,6 +61,24 @@ Drivers and applications in `linux/` (cross-compilation required), see [linux/sp
 
 　
 
+## Citation
+
+If this work helps your research, please cite it:
+
+```bibtex
+@misc{rfsoc4x2_clock_lmk_lmx,
+    author = {{Zzzed314} and Yijie Yu},
+    title = {{RFSoC 4x2 Clock Configuration (LMK04828 + LMX2594)}},
+    year = {2026},
+    howpublished = {\url{https://github.com/uceeyuf/RFSoC4x2_clock_LMK_LMX}},
+    note = {GitHub repository},
+}
+```
+
+GitHub also offers the citation under **Cite this repository** (from [CITATION.cff](CITATION.cff)).
+
+　
+
 　
 
 <span id="cn">RFSoC 4x2 时钟配置（LMK04828 + LMX2594）</span>
@@ -117,3 +135,21 @@ xsct run_jtag.tcl                                                     # UART1 11
 ## Linux
 
 驱动和应用在 `linux/` 目录（需要交叉编译），见 [linux/spi/README.md](linux/spi/README.md) 与 [linux/clk_APP/README.md](linux/clk_APP/README.md)。
+
+　
+
+## 引用
+
+如果这个项目对你的研究有帮助，请引用：
+
+```bibtex
+@misc{rfsoc4x2_clock_lmk_lmx,
+    author = {{Zzzed314} and Yijie Yu},
+    title = {{RFSoC 4x2 Clock Configuration (LMK04828 + LMX2594)}},
+    year = {2026},
+    howpublished = {\url{https://github.com/uceeyuf/RFSoC4x2_clock_LMK_LMX}},
+    note = {GitHub repository},
+}
+```
+
+GitHub 仓库页的 **Cite this repository** 也提供同样的引用（来自 [CITATION.cff](CITATION.cff)）。
