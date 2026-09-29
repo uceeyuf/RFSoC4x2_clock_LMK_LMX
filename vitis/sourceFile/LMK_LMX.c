@@ -4,6 +4,13 @@
 #include "sleep.h"
 #include "xgpiops.h"
 
+/* define CLK_DEBUG to print the SPI read-back of every register */
+#ifdef CLK_DEBUG
+#define CLK_DBG(...) printf(__VA_ARGS__)
+#else
+#define CLK_DBG(...)
+#endif
+
 #define MIO_LMK_RST 7
 #define MIO_LMK_CLK_IN_SEL0 8
 #define MIO_LMK_CLK_IN_SEL1 12
@@ -278,7 +285,11 @@ void write_clk(u8 slave_select){
     int Status;
     u8 TempBuffer[3];//each time write 3 bytes data
     u8 TempBufferread[3];
+#ifdef SDT
     SpiConfig = XSpiPs_LookupConfig(XPAR_XSPIPS_0_BASEADDR);
+#else
+    SpiConfig = XSpiPs_LookupConfig(XPAR_XSPIPS_0_DEVICE_ID);
+#endif
     XSpiPs_CfgInitialize(SpiInstancePtr, SpiConfig,
 				      SpiConfig->BaseAddress);
 
@@ -298,7 +309,11 @@ void write_clk(u8 slave_select){
     if (slave_select == 0) {
         XGpioPs Gpio;
         XGpioPs_Config *GpioConfigPtr;
+#ifdef SDT
         GpioConfigPtr = XGpioPs_LookupConfig(XPAR_GPIO_BASEADDR);
+#else
+        GpioConfigPtr = XGpioPs_LookupConfig(XPAR_XGPIOPS_0_DEVICE_ID);
+#endif
         XGpioPs_CfgInitialize(&Gpio, GpioConfigPtr,
 				       GpioConfigPtr->BaseAddr);
         XGpioPs_SetDirectionPin(&Gpio, MIO_LMK_RST, 1);
@@ -325,7 +340,7 @@ void write_clk(u8 slave_select){
             
             Status = XSpiPs_PolledTransfer(SpiInstancePtr, TempBuffer, 
             TempBufferread, 3);
-            printf("0x%x%x%x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);
+            CLK_DBG("0x%02x%02x%02x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);
             if (Status != XST_SUCCESS) {
                 xil_printf("SPI Transfer Failed\n");
             }
@@ -362,7 +377,7 @@ void write_clk(u8 slave_select){
 
             Status = XSpiPs_PolledTransfer(SpiInstancePtr, TempBuffer, 
             TempBufferread, 3);
-            printf("0x%x%x%x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);        
+            CLK_DBG("0x%02x%02x%02x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);        
             if (Status != XST_SUCCESS) {
                 xil_printf("SPI Transfer Failed\n");
             }
@@ -405,7 +420,7 @@ void write_clk(u8 slave_select){
 
             XSpiPs_PolledTransfer(SpiInstancePtr, TempBuffer, 
             TempBufferread, 3);
-            printf("0x%x%x%x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);
+            CLK_DBG("0x%02x%02x%02x\n",TempBufferread[0],TempBufferread[1],TempBufferread[2]);
             if (Status != XST_SUCCESS) {
                 xil_printf("SPI Transfer Failed\n");
             }
